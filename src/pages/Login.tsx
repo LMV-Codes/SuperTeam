@@ -6,7 +6,10 @@ import React from "react";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import CustomField from "../components/form/CustomField";
+import { useToast } from "@chakra-ui/react";
+
 export const Login: React.FC = () => {
+  const toast = useToast();
   const history = useHistory();
 
   const loginSchema = Yup.object().shape({
@@ -19,10 +22,10 @@ export const Login: React.FC = () => {
       .max(100, "Password is too long")
       .required("Password is required"),
   });
+
   return (
     <Container
       maxW="container.sm"
-      mt="2em"
       bg="brand.100"
       padding="2em"
       borderRadius="5px"
@@ -31,7 +34,25 @@ export const Login: React.FC = () => {
         validationSchema={loginSchema}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
-          history.push("/");
+          try {
+            const response = await axios.post(
+              "http://challenge-react.alkemy.org",
+              {
+                email: values.email,
+                password: values.password,
+              }
+            );
+            localStorage.setItem("token", response.data.token);
+            history.push("/");
+          } catch (error) {
+            toast({
+              title: "Error",
+              description: "Wrong Email or Password",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
         }}
       >
         {(props) => (
