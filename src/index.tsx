@@ -21,11 +21,32 @@ const theme = extendTheme({
       400: "#D70000",
     },
   },
+  components: {
+    Button: {
+      variants: {
+        super: {
+          bg: "brand.100",
+          _hover: { bg: "brand.200" },
+        },
+        superoutline: {
+          bg: "brand.50",
+          borderColor: "brand.300",
+          borderWidth: "0.12em",
+          _hover: { bg: "brand.200" },
+        },
+        superdanger: {
+          bg: "brand.200",
+          _hover: { bg: "brand.300", color: "brand.400" },
+        },
+      },
+    },
+  },
   styles: {
     global: {
       body: {
         minH: "100vh",
         bg: "brand.50",
+        color: "white",
       },
     },
   },
