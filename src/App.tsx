@@ -2,6 +2,7 @@ import * as React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar } from "./components/navbar/Navbar";
 import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 
 export const App = () => (
@@ -9,6 +10,7 @@ export const App = () => (
     <Navbar />
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
       <Route component={NotFound} />
     </Switch>
   </Router>
