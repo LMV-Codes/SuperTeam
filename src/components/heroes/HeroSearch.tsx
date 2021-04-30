@@ -3,14 +3,17 @@ import { FormControl, FormErrorMessage } from "@chakra-ui/form-control";
 import Icon from "@chakra-ui/icon";
 import { Input } from "@chakra-ui/input";
 import { Container, Flex } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import { AxiosApi } from "../../utils/AxiosApi";
 
 interface HeroSearchProps {
   setHeroSearch: Function;
 }
 export const HeroSearch: React.FC<HeroSearchProps> = ({ setHeroSearch }) => {
+  const toast = useToast();
   return (
     <Container
       maxW="container.sm"
@@ -20,7 +23,21 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({ setHeroSearch }) => {
     >
       <Formik
         initialValues={{ search: "" }}
-        onSubmit={async (values, { setErrors }) => {}}
+        onSubmit={async (values, { setErrors }) => {
+          try {
+            const response = await AxiosApi.get(`search/${values.search}`);
+            console.log(response.data);
+            return response.data;
+          } catch (error) {
+            toast({
+              title: "Error",
+              description: "Sorry, something went wrong",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+        }}
       >
         {(props) => (
           <Form>
