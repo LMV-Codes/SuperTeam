@@ -5,13 +5,24 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 
-export const App = () => (
-  <Router>
-    <Navbar />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route component={NotFound} />
-    </Switch>
-  </Router>
-);
+export const App: React.FC = () => {
+  const [userData, setUserData] = React.useState<string | null>("");
+  React.useEffect(() => {
+    setUserData(localStorage.getItem("token"));
+  }, []);
+
+  return (
+    <Router>
+      <Navbar userData={userData} setUserData={setUserData} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route
+          exact
+          path="/login"
+          render={(props) => <Login setUserData={setUserData} />}
+        />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
+  );
+};
