@@ -10,6 +10,7 @@ interface AddHeroProps {
 export const AddHero: React.FC<AddHeroProps> = ({ setSearch }) => {
   return (
     <Button
+      margin="1em"
       variant="superoutline"
       color="brand.300"
       width="10em"

@@ -13,9 +13,13 @@ import { AiOutlineClose } from "react-icons/ai";
 
 interface HeroSearchProps {
   setHeroSearch: Function;
+  setSuperTeam: Function;
 }
 
-export const HeroSearch: React.FC<HeroSearchProps> = ({ setHeroSearch }) => {
+export const HeroSearch: React.FC<HeroSearchProps> = ({
+  setHeroSearch,
+  setSuperTeam,
+}) => {
   const toast = useToast();
   const [heroData, setHeroData] = useState([]);
   return (
@@ -47,6 +51,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({ setHeroSearch }) => {
               const response = await AxiosApi.get(`search/${values.search}`);
               const checkResponse = () => {
                 if (response.data.results === undefined) {
+                  setHeroData([]);
                   toast({
                     title: "Error",
                     description: "Can't find a hero with that name",
@@ -82,7 +87,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({ setHeroSearch }) => {
                       <Input
                         {...field}
                         id="search"
-                        placeholder="Search"
+                        placeholder="Search members for your super team"
                         type="text"
                         borderRightRadius="0"
                         borderColor="brand.300"
@@ -112,7 +117,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({ setHeroSearch }) => {
           )}
         </Formik>
 
-        <SearchList heroData={heroData} />
+        <SearchList heroData={heroData} setSuperTeam={setSuperTeam} />
       </Flex>
     </Container>
   );

@@ -1,45 +1,18 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Flex, Heading, Text } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
 import React from "react";
-
-interface heroData {
-  id: string;
-  name: string;
-  powerstats: {
-    combat: string;
-    durability: string;
-    intelligence: string;
-    power: string;
-    speed: string;
-    strength: string;
-  };
-  appearance: {
-    gender: string;
-    race: string;
-    "eye-color": string;
-    "hair-color": string;
-  };
-  height: string[];
-  wegith: string[];
-  race: string;
-  biography: {
-    aliases: string[];
-    "full-name": string;
-    "alter-egos": string;
-    "place-of-birth": string;
-    publisher: string;
-  };
-  image: { url: string };
-  connections: { "group-affiliations": string; relatives: string };
-  work: { occupation: string; base: string };
-}
+import { HeroData } from "../../utils/interfaces";
 
 interface SearchListProps {
-  heroData: heroData[];
+  heroData: HeroData[];
+  setSuperTeam: Function;
 }
 
-export const SearchList: React.FC<SearchListProps> = ({ heroData }) => {
+export const SearchList: React.FC<SearchListProps> = ({
+  heroData,
+  setSuperTeam,
+}) => {
   return (
     <Flex wrap="wrap" justifyContent="center" alignItems="center">
       {heroData.map((hero, index) => (
@@ -68,6 +41,9 @@ export const SearchList: React.FC<SearchListProps> = ({ heroData }) => {
             variant="superoutline"
             fontWeight="regular"
             textTransform="uppercase"
+            onClick={() =>
+              setSuperTeam((state: HeroData[]) => [...state, hero])
+            }
           >
             Add to team
           </Button>
