@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { FormControl, FormErrorMessage } from "@chakra-ui/form-control";
 import Icon from "@chakra-ui/icon";
 import { Input } from "@chakra-ui/input";
-import { Container, Flex } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
@@ -116,7 +116,11 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           )}
         </Formik>
 
-        <SearchList heroData={heroData} setSuperTeam={setSuperTeam} />
+        <SearchList
+          heroData={heroData}
+          setSuperTeam={setSuperTeam}
+          setHeroSearch={setHeroSearch}
+        />
       </Flex>
     </Flex>
   );

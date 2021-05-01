@@ -7,11 +7,13 @@ import { HeroData } from "../../utils/interfaces";
 interface SearchListProps {
   heroData: HeroData[];
   setSuperTeam: Function;
+  setHeroSearch: Function;
 }
 
 export const SearchList: React.FC<SearchListProps> = ({
   heroData,
   setSuperTeam,
+  setHeroSearch,
 }) => {
   return (
     <Flex wrap="wrap" justifyContent="center" alignItems="center">
@@ -41,9 +43,10 @@ export const SearchList: React.FC<SearchListProps> = ({
             variant="superoutline"
             fontWeight="regular"
             textTransform="uppercase"
-            onClick={() =>
-              setSuperTeam((state: HeroData[]) => [...state, hero])
-            }
+            onClick={() => {
+              setSuperTeam((state: HeroData[]) => [...state, hero]);
+              setHeroSearch(false);
+            }}
           >
             Add to team
           </Button>
