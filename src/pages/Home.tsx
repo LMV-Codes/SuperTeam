@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
             setSuperTeam={setSuperTeam}
           />
         )}
-        <Flex alignItems="center">
+        <Flex alignItems="center" marginTop="1em" flexWrap="wrap">
           {superTeam.map((member: HeroData, index: number) => (
             <TeamMember hero={member} />
           ))}

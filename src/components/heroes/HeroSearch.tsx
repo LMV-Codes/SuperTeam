@@ -23,24 +23,23 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   const toast = useToast();
   const [heroData, setHeroData] = useState([]);
   return (
-    <Container
-      maxW="container.lg"
-      bg="brand.100"
-      padding="2em"
-      borderRadius="5px"
+    <Flex
+      width="100%"
+      height="100%"
+      bg="rgba(16, 15, 16, 0.8)"
+      position="absolute"
+      zIndex="10"
+      justifyContent="center"
+      top="0"
+      left="0"
     >
-      <Flex
-        flexDirection="column"
-        bg="brand.50"
-        padding="2em"
-        borderRadius="5px"
-      >
+      <Flex flexDirection="column" padding="2em" width="100%">
         <Icon
           as={AiOutlineClose}
           fontSize="1.2em"
           marginLeft="auto"
           marginRight="0"
-          _hover={{ color: "brand.300", cursor: "pointer" }}
+          _hover={{ color: "brand.400", cursor: "pointer" }}
           paddingTop="0"
           onClick={() => setHeroSearch(false)}
         />
@@ -119,6 +118,6 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
 
         <SearchList heroData={heroData} setSuperTeam={setSuperTeam} />
       </Flex>
-    </Container>
+    </Flex>
   );
 };

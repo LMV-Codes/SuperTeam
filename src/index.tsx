@@ -36,7 +36,13 @@ const theme = extendTheme({
         },
         superdanger: {
           bg: "brand.200",
-          _hover: { bg: "brand.300", color: "brand.400" },
+          borderWidth: "1px",
+          borderColor: "brand.200",
+          _hover: {
+            bg: "brand.50",
+            color: "brand.400",
+            borderColor: "brand.300",
+          },
         },
       },
     },
