@@ -11,13 +11,13 @@ import { AxiosApi } from "../../utils/AxiosApi";
 import { SearchList } from "./SearchList";
 import { AiOutlineClose } from "react-icons/ai";
 
-interface HeroSearchProps {
-  setHeroSearch: Function;
+interface TeamSearchProps {
+  setTeamSearch: Function;
   setSuperTeam: Function;
 }
 
-export const HeroSearch: React.FC<HeroSearchProps> = ({
-  setHeroSearch,
+export const TeamSearch: React.FC<TeamSearchProps> = ({
+  setTeamSearch,
   setSuperTeam,
 }) => {
   const toast = useToast();
@@ -33,7 +33,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
       top="0"
       left="0"
     >
-      <Flex flexDirection="column" padding="2em" width="100%">
+      <Flex flexDirection="column" margin="2em" width="80%">
         <Icon
           as={AiOutlineClose}
           fontSize="1.2em"
@@ -41,7 +41,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           marginRight="0"
           _hover={{ color: "brand.400", cursor: "pointer" }}
           paddingTop="0"
-          onClick={() => setHeroSearch(false)}
+          onClick={() => setTeamSearch(false)}
         />
         <Formik
           initialValues={{ search: "" }}
@@ -119,7 +119,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         <SearchList
           heroData={heroData}
           setSuperTeam={setSuperTeam}
-          setHeroSearch={setHeroSearch}
+          setTeamSearch={setTeamSearch}
         />
       </Flex>
     </Flex>

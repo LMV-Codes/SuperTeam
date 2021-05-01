@@ -6,9 +6,20 @@ import { HeroData } from "../../utils/interfaces";
 
 interface TeamMemberProps {
   hero: HeroData;
+  setSuperTeam: Function;
+  superTeam: HeroData[];
 }
 
-export const TeamMember: React.FC<TeamMemberProps> = ({ hero }) => {
+export const TeamMember: React.FC<TeamMemberProps> = ({
+  hero,
+  superTeam,
+  setSuperTeam,
+}) => {
+  const handleRemove = (superTeam: HeroData[], heroId: string) => {
+    const newTeam = superTeam.filter((teamHero) => teamHero.id !== heroId);
+    setSuperTeam(newTeam);
+  };
+
   return (
     <Flex
       flexDirection="column"
@@ -59,6 +70,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({ hero }) => {
           margin="1em"
           textTransform="uppercase"
           isFullWidth
+          onClick={() => handleRemove(superTeam, hero.id)}
         >
           Remove
         </Button>
