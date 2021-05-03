@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { Icon } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
@@ -18,11 +18,24 @@ interface decodedUser {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ userData, setUserData }) => {
+  const history = useHistory();
+
+  const checkLogin = () => {
+    if (localStorage.getItem("token") === null) {
+      history.push("/login");
+    }
+  };
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
   const logout = () => {
     localStorage.clear();
     setUserData("");
+    history.push("/login");
   };
-  const checkData = () => {
+  const decodeToken = () => {
     if (userData !== "" && userData !== null) {
       const decodedUser: decodedUser = jwt_decode(userData);
       return decodedUser.email;
@@ -43,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userData, setUserData }) => {
         {userData ? (
           <Flex alignItems="center">
             <Icon as={FaUser} marginRight="0.3em" />
-            <Text marginRight="1em">{checkData()}</Text>
+            <Text marginRight="1em">{decodeToken()}</Text>
             <Button variant="superdanger" onClick={() => logout()}>
               Logout
             </Button>
