@@ -7,12 +7,13 @@ import { HeroData } from "../utils/interfaces";
 
 export const Home: React.FC = () => {
   const [heroSearch, setTeamSearch] = useState(false);
-  const [superTeam, setSuperTeam] = useState<any>([]);
+  const [superTeam, setSuperTeam] = useState<HeroData[]>([]);
   return (
     <Flex justifyContent="center">
       <Container maxW="container.lg" bg="brand.100" minHeight="100vh">
         {heroSearch && (
           <TeamSearch
+            superTeam={superTeam}
             setTeamSearch={setTeamSearch}
             setSuperTeam={setSuperTeam}
           />
@@ -20,6 +21,7 @@ export const Home: React.FC = () => {
         <Flex alignItems="center" marginTop="1em" flexWrap="wrap">
           {superTeam.map((member: HeroData, index: number) => (
             <TeamMember
+              key={index}
               hero={member}
               setSuperTeam={setSuperTeam}
               superTeam={superTeam}

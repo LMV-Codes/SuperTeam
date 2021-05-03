@@ -10,15 +10,18 @@ import { FaSearch } from "react-icons/fa";
 import { AxiosApi } from "../../utils/AxiosApi";
 import { SearchList } from "./SearchList";
 import { AiOutlineClose } from "react-icons/ai";
+import { HeroData } from "../../utils/interfaces";
 
 interface TeamSearchProps {
   setTeamSearch: Function;
   setSuperTeam: Function;
+  superTeam: HeroData[];
 }
 
 export const TeamSearch: React.FC<TeamSearchProps> = ({
   setTeamSearch,
   setSuperTeam,
+  superTeam,
 }) => {
   const toast = useToast();
   const [heroData, setHeroData] = useState([]);
@@ -64,7 +67,6 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
               };
               checkResponse();
             } catch (error) {
-              console.log(error);
               toast({
                 title: "Error",
                 description: "Sorry, something went wrong",
@@ -92,6 +94,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
                         borderColor="brand.300"
                         bg="brand.50"
                         focusBorderColor="brand.300"
+                        autoFocus
                       />
                       <FormErrorMessage>{form.errors.search}</FormErrorMessage>
                     </FormControl>
@@ -120,6 +123,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
           heroData={heroData}
           setSuperTeam={setSuperTeam}
           setTeamSearch={setTeamSearch}
+          superTeam={superTeam}
         />
       </Flex>
     </Flex>

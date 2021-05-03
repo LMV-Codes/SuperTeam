@@ -16,9 +16,10 @@ export interface HeroData {
     "hair-color": string;
   };
   height: string[];
-  wegith: string[];
+  weigth: string[];
   race: string;
   biography: {
+    alignment: string;
     aliases: string[];
     "full-name": string;
     "alter-egos": string;

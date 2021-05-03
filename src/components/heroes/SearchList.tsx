@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import React from "react";
 import { HeroData } from "../../utils/interfaces";
 
@@ -8,13 +9,67 @@ interface SearchListProps {
   heroData: HeroData[];
   setSuperTeam: Function;
   setTeamSearch: Function;
+  superTeam: HeroData[];
 }
 
 export const SearchList: React.FC<SearchListProps> = ({
   heroData,
   setSuperTeam,
   setTeamSearch,
+  superTeam,
 }) => {
+  const toast = useToast();
+
+  const getHeroesAlignment = (superTeam: HeroData[]) => {
+    let goodHeroes = 0;
+    let evilHeroes = 0;
+    superTeam.forEach((hero) => {
+      if (hero.biography.alignment === "good") {
+        goodHeroes = goodHeroes + 1;
+      } else {
+        evilHeroes = evilHeroes + 1;
+      }
+    });
+    return { goodHeroes, evilHeroes };
+  };
+
+  const checkIdNotRepeated = (superTeam: HeroData[], hero: HeroData) => {
+    const checkId = superTeam.some((teamHero) => teamHero.id === hero.id);
+    if (checkId === false) {
+    }
+    return checkId;
+  };
+  const checkHeroBalance = (superTeam: HeroData[], hero: HeroData) => {
+    const { goodHeroes, evilHeroes } = getHeroesAlignment(superTeam);
+    if (hero.biography.alignment === "good" && goodHeroes === 3) {
+      return false;
+    }
+    if (hero.biography.alignment === "evil" && evilHeroes === 3) {
+      return false;
+    }
+    return true;
+  };
+  const addHeroes = (hero: HeroData, superTeam: HeroData[]) => {
+    const repeat = checkIdNotRepeated(superTeam, hero);
+    const balance = checkHeroBalance(superTeam, hero);
+    if (repeat === true) {
+      toast({
+        title: "Can't add the same hero twice",
+        status: "error",
+        isClosable: true,
+      });
+    } else if (balance === false) {
+      toast({
+        title: "Your team must have 3 evil and 3 good heroes",
+        status: "error",
+        isClosable: true,
+      });
+    } else {
+      setSuperTeam((state: HeroData[]) => [...state, hero]);
+      setTeamSearch(false);
+    }
+  };
+
   return (
     <Flex wrap="wrap" justifyContent="center" alignItems="center">
       {heroData.map((hero, index) => (
@@ -43,10 +98,7 @@ export const SearchList: React.FC<SearchListProps> = ({
             variant="superoutline"
             fontWeight="regular"
             textTransform="uppercase"
-            onClick={() => {
-              setSuperTeam((state: HeroData[]) => [...state, hero]);
-              setTeamSearch(false);
-            }}
+            onClick={() => addHeroes(hero, superTeam)}
           >
             Add to team
           </Button>
