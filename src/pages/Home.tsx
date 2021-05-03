@@ -10,7 +10,7 @@ export const Home: React.FC = () => {
   const [superTeam, setSuperTeam] = useState<HeroData[]>([]);
   return (
     <Flex justifyContent="center">
-      <Container maxW="container.lg" bg="brand.100" minHeight="100vh">
+      <Container maxW="container.xl" bg="brand.100" minHeight="100vh">
         {heroSearch && (
           <TeamSearch
             superTeam={superTeam}
@@ -18,7 +18,12 @@ export const Home: React.FC = () => {
             setSuperTeam={setSuperTeam}
           />
         )}
-        <Flex alignItems="center" marginTop="1em" flexWrap="wrap">
+        <Flex
+          alignItems="center"
+          marginTop="1em"
+          flexWrap="wrap"
+          justifyContent="center"
+        >
           {superTeam.map((member: HeroData, index: number) => (
             <TeamMember
               key={index}
@@ -27,7 +32,7 @@ export const Home: React.FC = () => {
               superTeam={superTeam}
             />
           ))}
-          <AddHero setSearch={setTeamSearch} />
+          {superTeam.length < 6 && <AddHero setSearch={setTeamSearch} />}
         </Flex>
       </Container>
     </Flex>

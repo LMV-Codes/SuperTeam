@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Flex, Text } from "@chakra-ui/layout";
-import React from "react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
+import React, { useState } from "react";
 import { HeroData } from "../../utils/interfaces";
 
 interface TeamMemberProps {
@@ -15,11 +15,29 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   superTeam,
   setSuperTeam,
 }) => {
+  const [showDetails, setShowDetails] = useState(false);
+
   const handleRemove = (superTeam: HeroData[], heroId: string) => {
     const newTeam = superTeam.filter((teamHero) => teamHero.id !== heroId);
     setSuperTeam(newTeam);
   };
-
+  const stats = Object.entries(hero.powerstats);
+  const details = {
+    weight: hero.appearance.weight.map((weight) => (
+      <Text textAlign="end">{weight}</Text>
+    )),
+    height: hero.appearance.height.map((height) => (
+      <Text textAlign="end">{height}</Text>
+    )),
+    fullname: hero.biography["full-name"],
+    haircolor: hero.appearance["hair-color"],
+    eyecolor: hero.appearance["eye-color"],
+    work: hero.work.base,
+    aliases: hero.biography.aliases.map((alias) => (
+      <Text textAlign="end">{alias}</Text>
+    )),
+  };
+  const detailsArray = Object.entries(details);
   return (
     <Flex
       flexDirection="column"
@@ -29,31 +47,77 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
       margin="1em"
     >
       <Flex>
-        <Image
-          src={hero.image.url}
-          alt={hero.name}
-          width="12em"
-          borderRadius="5px"
-        />
-        <Flex flexDirection="column" marginLeft="1em" justifyContent="center">
-          <Text>
-            Combat: {hero.powerstats.combat}
-            <br />
-            Durability: {hero.powerstats.durability}
-            <br />
-            Intelligence: {hero.powerstats.intelligence}
-            <br />
-            Power: {hero.powerstats.power}
-            <br />
-            Speed: {hero.powerstats.speed}
-            <br />
-            Strength: {hero.powerstats.strength}
-          </Text>
+        <Flex justifyContent="center" alignContent="center">
+          <Image
+            src={hero.image.url}
+            alt={hero.name}
+            width="12em"
+            borderRadius="5px"
+            objectFit="cover"
+          />
         </Flex>
+        <Flex
+          flexDirection="column"
+          marginLeft="1em"
+          justifyContent="space-between"
+        >
+          <Heading
+            textAlign="center"
+            as="h4"
+            textTransform="uppercase"
+            size="sm"
+            justifySelf="flex-start"
+          >
+            stats
+          </Heading>
+          {stats.map((stat, index) => (
+            <Flex key={index} justifyContent="space-between">
+              <Text fontFamily="Roboto Condensed" textTransform="capitalize">
+                {stat[0]}:
+              </Text>
+              <Text fontWeight="bold" color="brand.400" marginLeft="0.2em">
+                {stat[1]}
+              </Text>
+            </Flex>
+          ))}
+        </Flex>
+        {showDetails && (
+          <Flex
+            marginLeft="1em"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <Heading
+              textAlign="center"
+              as="h4"
+              textTransform="uppercase"
+              size="sm"
+              justifySelf="flex-start"
+            >
+              Details
+            </Heading>
+            {detailsArray.map((app, index) => (
+              <Flex key={index} justifyContent="space-between">
+                <Text fontFamily="Roboto Condensed" textTransform="capitalize">
+                  {app[0]}:
+                </Text>
+                <Text fontWeight="bold" color="brand.400" marginLeft="0.2em">
+                  {app[1]}
+                </Text>
+              </Flex>
+            ))}
+          </Flex>
+        )}
       </Flex>
-      <Text textAlign="center" textTransform="uppercase" marginTop="0.5em">
+      <Heading
+        textAlign="center"
+        textTransform="uppercase"
+        marginTop="0.5em"
+        size="md"
+        fontWeight="regular"
+      >
         {hero.name}
-      </Text>
+      </Heading>
       <Flex justifyContent="space-evenly">
         <Button
           variant="superoutline"
@@ -61,6 +125,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
           margin="1em"
           textTransform="uppercase"
           isFullWidth
+          onClick={() => setShowDetails(!showDetails)}
         >
           Details
         </Button>

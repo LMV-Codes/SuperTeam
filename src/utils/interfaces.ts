@@ -14,9 +14,9 @@ export interface HeroData {
     race: string;
     "eye-color": string;
     "hair-color": string;
+    height: string[];
+    weight: string[];
   };
-  height: string[];
-  weigth: string[];
   race: string;
   biography: {
     alignment: string;
