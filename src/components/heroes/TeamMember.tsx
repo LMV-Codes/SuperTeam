@@ -75,7 +75,12 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
               <Text fontFamily="Roboto Condensed" textTransform="capitalize">
                 {stat[0]}:
               </Text>
-              <Text fontWeight="bold" color="brand.400" marginLeft="0.2em">
+              <Text
+                fontWeight="bold"
+                fontFamily="Roboto Condensed"
+                color="brand.400"
+                marginLeft="0.2em"
+              >
                 {stat[1]}
               </Text>
             </Flex>
@@ -101,7 +106,12 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
                 <Text fontFamily="Roboto Condensed" textTransform="capitalize">
                   {app[0]}:
                 </Text>
-                <Text fontWeight="bold" color="brand.400" marginLeft="0.2em">
+                <Text
+                  fontWeight="bold"
+                  color="brand.400"
+                  marginLeft="0.2em"
+                  fontFamily="Roboto Condensed"
+                >
                   {app[1]}
                 </Text>
               </Flex>
@@ -118,17 +128,40 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
       >
         {hero.name}
       </Heading>
+      <Text
+        textAlign="center"
+        fontSize="0.9em"
+        textTransform="uppercase"
+        fontWeight="regular"
+      >
+        Alignment: {hero.biography.alignment}
+      </Text>
       <Flex justifyContent="space-evenly">
-        <Button
-          variant="superoutline"
-          fontWeight="regular"
-          margin="1em"
-          textTransform="uppercase"
-          isFullWidth
-          onClick={() => setShowDetails(!showDetails)}
-        >
-          Details
-        </Button>
+        {showDetails ? (
+          <Button
+            variant="superoutline"
+            fontWeight="regular"
+            margin="1em"
+            textTransform="uppercase"
+            bg="brand.200"
+            isFullWidth
+            onClick={() => setShowDetails(!showDetails)}
+          >
+            Details
+          </Button>
+        ) : (
+          <Button
+            variant="superoutline"
+            fontWeight="regular"
+            margin="1em"
+            textTransform="uppercase"
+            isFullWidth
+            onClick={() => setShowDetails(!showDetails)}
+          >
+            Details
+          </Button>
+        )}
+
         <Button
           variant="superdanger"
           fontWeight="regular"

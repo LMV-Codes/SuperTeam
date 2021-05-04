@@ -35,7 +35,7 @@ const theme = extendTheme({
           _hover: { bg: "brand.200" },
         },
         superdanger: {
-          bg: "brand.200",
+          bg: "brand.50",
           borderWidth: "1px",
           borderColor: "brand.200",
           _hover: {
