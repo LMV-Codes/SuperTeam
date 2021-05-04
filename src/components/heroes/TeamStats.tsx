@@ -31,7 +31,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
   };
 
   const getBigStat = (stats: Array<Array<string | number>>) => {
-    let bigStat: Array<string | number> = ["TestStat", 0];
+    let bigStat: Array<string | number> = ["None", 0];
     stats.forEach((stat) => {
       if (stat[1] > bigStat[1]) {
         bigStat = stat;
@@ -51,6 +51,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
       bg="brand.50"
       padding="1em"
       borderRadius="5px"
+      marginBottom="1em"
     >
       <Flex>
         <Heading

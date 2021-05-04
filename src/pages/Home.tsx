@@ -5,6 +5,7 @@ import { TeamSearch } from "../components/heroes/TeamSearch";
 import { TeamMember } from "../components/heroes/TeamMember";
 import { HeroData } from "../utils/interfaces";
 import { TeamStats } from "../components/heroes/TeamStats";
+import { TeamHW } from "../components/heroes/TeamHW";
 
 export const Home: React.FC = () => {
   const [heroSearch, setTeamSearch] = useState(false);
@@ -36,6 +37,7 @@ export const Home: React.FC = () => {
           {superTeam.length < 6 && <AddHero setSearch={setTeamSearch} />}
         </Flex>
         <TeamStats team={superTeam} />
+        <TeamHW team={superTeam} />
       </Container>
     </Flex>
   );
