@@ -74,7 +74,7 @@ export const SearchList: React.FC<SearchListProps> = ({
   };
 
   return (
-    <Flex wrap="wrap" justifyContent="center" alignItems="center">
+    <Flex wrap="wrap" justifyContent="center">
       {!loading ? (
         <>
           {heroData.map((hero, index) => (
@@ -90,12 +90,22 @@ export const SearchList: React.FC<SearchListProps> = ({
               borderRadius="5px"
               marginLeft="1em"
             >
-              <Image
-                src={hero.image.url}
-                alt={hero.name}
-                maxWidth="12em"
+              <Flex
+                bg="brand.100"
+                width="12em"
+                height="16em"
+                justifyContent="center"
+                alignItems="center"
                 borderRadius="5px"
-              />
+                marginBottom="1em"
+              >
+                <Image
+                  src={hero.image.url}
+                  alt={hero.name}
+                  maxWidth="12em"
+                  borderRadius="5px"
+                />
+              </Flex>
               <Text fontFamily="Mono">{hero.name}</Text>
               <Text fontFamily="Mono">{hero.biography["full-name"]}</Text>
               <Button
