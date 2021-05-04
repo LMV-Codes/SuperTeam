@@ -55,8 +55,14 @@ export const Navbar: React.FC<NavbarProps> = ({ userData, setUserData }) => {
       <Box justifySelf="end" marginLeft="auto" marginRight="1em">
         {userData ? (
           <Flex alignItems="center">
-            <Icon as={FaUser} marginRight="0.3em" />
-            <Text marginRight="1em">{decodeToken()}</Text>
+            <Icon as={FaUser} marginRight="0.3em" fontSize="0.7em" />
+            <Text
+              marginRight="1em"
+              fontFamily="Roboto Condensed"
+              fontSize="0.8em"
+            >
+              {decodeToken()}
+            </Text>
             <Button variant="superdanger" onClick={() => logout()}>
               Logout
             </Button>

@@ -23,11 +23,15 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   };
   const stats = Object.entries(hero.powerstats);
   const details = {
-    weight: hero.appearance.weight.map((weight) => (
-      <Text textAlign="end">{weight}</Text>
+    weight: hero.appearance.weight.map((weight, index) => (
+      <Text textAlign="end" key={index}>
+        {weight}
+      </Text>
     )),
-    height: hero.appearance.height.map((height) => (
-      <Text textAlign="end">{height}</Text>
+    height: hero.appearance.height.map((height, index) => (
+      <Text textAlign="end" key={index}>
+        {height}
+      </Text>
     )),
     fullname: hero.biography["full-name"],
     haircolor: hero.appearance["hair-color"],
