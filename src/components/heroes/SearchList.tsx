@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
 import { useToast } from "@chakra-ui/toast";
 import React from "react";
 import { HeroData } from "../../utils/interfaces";
@@ -10,6 +11,7 @@ interface SearchListProps {
   setSuperTeam: Function;
   setTeamSearch: Function;
   superTeam: HeroData[];
+  loading: boolean;
 }
 
 export const SearchList: React.FC<SearchListProps> = ({
@@ -17,6 +19,7 @@ export const SearchList: React.FC<SearchListProps> = ({
   setSuperTeam,
   setTeamSearch,
   superTeam,
+  loading,
 }) => {
   const toast = useToast();
 
@@ -72,38 +75,50 @@ export const SearchList: React.FC<SearchListProps> = ({
 
   return (
     <Flex wrap="wrap" justifyContent="center" alignItems="center">
-      {heroData.map((hero, index) => (
-        <Flex
-          padding="1em"
-          marginTop="1em"
-          bg="brand.100"
-          key={index}
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          textAlign="center"
-          borderRadius="5px"
-          marginLeft="1em"
-        >
-          <Image
-            src={hero.image.url}
-            alt={hero.name}
-            maxWidth="12em"
-            borderRadius="5px"
-          />
-          <Text fontFamily="Mono">{hero.name}</Text>
-          <Text fontFamily="Mono">{hero.biography["full-name"]}</Text>
-          <Button
-            marginTop="0.5em"
-            variant="superoutline"
-            fontWeight="regular"
-            textTransform="uppercase"
-            onClick={() => addHeroes(hero, superTeam)}
-          >
-            Add to team
-          </Button>
-        </Flex>
-      ))}
+      {!loading ? (
+        <>
+          {heroData.map((hero, index) => (
+            <Flex
+              padding="1em"
+              marginTop="1em"
+              bg="brand.50"
+              key={index}
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              textAlign="center"
+              borderRadius="5px"
+              marginLeft="1em"
+            >
+              <Image
+                src={hero.image.url}
+                alt={hero.name}
+                maxWidth="12em"
+                borderRadius="5px"
+              />
+              <Text fontFamily="Mono">{hero.name}</Text>
+              <Text fontFamily="Mono">{hero.biography["full-name"]}</Text>
+              <Button
+                marginTop="0.5em"
+                variant="superoutline"
+                fontWeight="regular"
+                textTransform="uppercase"
+                onClick={() => addHeroes(hero, superTeam)}
+              >
+                Add to team
+              </Button>
+            </Flex>
+          ))}
+        </>
+      ) : (
+        <Spinner
+          color="brand.300"
+          emptyColor="brand.400"
+          thickness="4px"
+          marginTop="5em"
+          size="xl"
+        />
+      )}
     </Flex>
   );
 };

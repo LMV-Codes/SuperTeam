@@ -1,5 +1,4 @@
 import { Button } from "@chakra-ui/button";
-import { FormControl, FormErrorMessage } from "@chakra-ui/form-control";
 import Icon from "@chakra-ui/icon";
 import { Input } from "@chakra-ui/input";
 import { Flex } from "@chakra-ui/layout";
@@ -23,6 +22,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
   setSuperTeam,
   superTeam,
 }) => {
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const [heroData, setHeroData] = useState([]);
   return (
@@ -36,7 +36,14 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
       top="0"
       left="0"
     >
-      <Flex flexDirection="column" margin="2em" width="80%">
+      <Flex
+        flexDirection="column"
+        margin="2em"
+        width="80%"
+        bg="brand.100"
+        padding="2em"
+        borderRadius="5px"
+      >
         <Icon
           as={AiOutlineClose}
           fontSize="1.2em"
@@ -66,6 +73,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
                 }
               };
               checkResponse();
+              setLoading(false);
             } catch (error) {
               toast({
                 title: "Error",
@@ -81,23 +89,18 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
             <Form>
               <Flex alignItems="flex-end">
                 <Field name="search">
-                  {({ field, form }: any) => (
-                    <FormControl
-                      isInvalid={form.errors.search && form.touchedsearch}
-                    >
-                      <Input
-                        {...field}
-                        id="search"
-                        placeholder="Search members for your super team"
-                        type="text"
-                        borderRightRadius="0"
-                        borderColor="brand.300"
-                        bg="brand.50"
-                        focusBorderColor="brand.300"
-                        autoFocus
-                      />
-                      <FormErrorMessage>{form.errors.search}</FormErrorMessage>
-                    </FormControl>
+                  {({ field }: any) => (
+                    <Input
+                      {...field}
+                      id="search"
+                      placeholder="Search members for your super team"
+                      type="text"
+                      borderRightRadius="0"
+                      borderColor="brand.300"
+                      bg="brand.50"
+                      focusBorderColor="brand.300"
+                      autoFocus
+                    />
                   )}
                 </Field>
                 <Button
@@ -111,6 +114,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
                   marginRight="auto"
                   fontWeight="regular"
                   borderLeftRadius="0"
+                  onClick={() => setLoading(true)}
                 >
                   <Icon as={FaSearch} />
                 </Button>
@@ -124,6 +128,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
           setSuperTeam={setSuperTeam}
           setTeamSearch={setTeamSearch}
           superTeam={superTeam}
+          loading={loading}
         />
       </Flex>
     </Flex>
