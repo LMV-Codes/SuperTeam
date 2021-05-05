@@ -59,6 +59,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
           size="md"
           fontWeight="bold"
           marginBottom="1em"
+          textAlign="center"
         >
           dominant team stat:
         </Heading>
@@ -69,6 +70,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
           marginBottom="1em"
           color="brand.400"
           marginLeft="0.3em"
+          alignSelf="center"
         >
           {bigStat[0]}
         </Heading>
@@ -82,7 +84,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
         team stats
       </Heading>
 
-      <Flex flexWrap="wrap">
+      <Flex flexWrap="wrap" justifyContent="space-around">
         {statArray.map((powerstat, index) => (
           <Flex key={index}>
             <Text
