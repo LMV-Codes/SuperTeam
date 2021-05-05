@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Container, Flex, Heading } from "@chakra-ui/layout";
 import axios from "axios";
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import CustomField from "../components/form/CustomField";
@@ -12,9 +12,23 @@ interface LoginProps {
   setUserData: Function;
 }
 
+
+
 export const Login: React.FC<LoginProps> = ({ setUserData }) => {
   const toast = useToast();
   const history = useHistory();
+
+  const checkLogin = () => {
+    if (localStorage.getItem("token") !== null) {
+      history.push("/");
+    }
+  };
+  
+  useEffect(() => {
+    checkLogin();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
 
   const loginSchema = Yup.object().shape({
     email: Yup.string()
