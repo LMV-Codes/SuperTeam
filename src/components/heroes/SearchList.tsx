@@ -25,15 +25,15 @@ export const SearchList: React.FC<SearchListProps> = ({
 
   const getHeroesAlignment = (superTeam: HeroData[]) => {
     let goodHeroes = 0;
-    let evilHeroes = 0;
+    let badHeroes = 0;
     superTeam.forEach((hero) => {
       if (hero.biography.alignment === "good") {
         goodHeroes = goodHeroes + 1;
       } else {
-        evilHeroes = evilHeroes + 1;
+        badHeroes = badHeroes + 1;
       }
     });
-    return { goodHeroes, evilHeroes };
+    return { goodHeroes, badHeroes };
   };
 
   const checkIdNotRepeated = (superTeam: HeroData[], hero: HeroData) => {
@@ -43,11 +43,11 @@ export const SearchList: React.FC<SearchListProps> = ({
     return checkId;
   };
   const checkHeroBalance = (superTeam: HeroData[], hero: HeroData) => {
-    const { goodHeroes, evilHeroes } = getHeroesAlignment(superTeam);
+    const { goodHeroes, badHeroes } = getHeroesAlignment(superTeam);
     if (hero.biography.alignment === "good" && goodHeroes === 3) {
       return false;
     }
-    if (hero.biography.alignment === "evil" && evilHeroes === 3) {
+    if (hero.biography.alignment === "bad" && badHeroes === 3) {
       return false;
     }
     return true;
@@ -63,7 +63,7 @@ export const SearchList: React.FC<SearchListProps> = ({
       });
     } else if (balance === false) {
       toast({
-        title: "Your team must have 3 evil and 3 good heroes",
+        title: "Your team must have 3 bad and 3 good heroes",
         status: "error",
         isClosable: true,
       });
