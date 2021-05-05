@@ -37,8 +37,10 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
     haircolor: hero.appearance["hair-color"],
     eyecolor: hero.appearance["eye-color"],
     work: hero.work.base,
-    aliases: hero.biography.aliases.map((alias) => (
-      <Text textAlign="end">{alias}</Text>
+    aliases: hero.biography.aliases.map((alias, index) => (
+      <Text key={index} textAlign="end">
+        {alias}
+      </Text>
     )),
   };
   const detailsArray = Object.entries(details);

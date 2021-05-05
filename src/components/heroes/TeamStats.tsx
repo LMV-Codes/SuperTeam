@@ -51,7 +51,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
       bg="brand.50"
       padding="1em"
       borderRadius="5px"
-      marginBottom="1em"
+      margin="1em"
     >
       <Flex>
         <Heading

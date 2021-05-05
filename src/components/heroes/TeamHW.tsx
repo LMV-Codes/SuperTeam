@@ -25,9 +25,21 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
     return avgWeight;
   };
 
+  const poundConverter = (weight: number) => {
+    return Math.round(weight * 2.20462);
+  };
+
+  const feetConverter = (height: number) => {
+    const realFeet = (height * 0.3937) / 12;
+    const feet = Math.floor(realFeet);
+    const inches = Math.round((realFeet - feet) * 12);
+    return `${feet}'${inches}`;
+  };
+
   const avgHeight = getAverageHeight(team);
   const avgWeight = getAverageWeight(team);
-
+  const avgPounds = poundConverter(avgWeight);
+  const avgFeet = feetConverter(avgHeight);
   return (
     <Flex
       bg="brand.50"
@@ -42,8 +54,12 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
         Average Team Height/Weight
       </Heading>
       <Flex justifyContent="space-around">
-        <Text>Height: {avgHeight}cm</Text>
-        <Text>Weight: {avgWeight}kg</Text>
+        <Text>
+          Height: {avgHeight}cm / {avgFeet}
+        </Text>
+        <Text>
+          Weight: {avgWeight}kg / {avgPounds}lbs
+        </Text>
       </Flex>
     </Flex>
   );

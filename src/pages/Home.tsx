@@ -13,6 +13,7 @@ export const Home: React.FC = () => {
   return (
     <Flex justifyContent="center">
       <Container maxW="container.xl" bg="brand.100" minHeight="100vh">
+        <TeamStats team={superTeam} />
         {heroSearch && (
           <TeamSearch
             superTeam={superTeam}
@@ -36,7 +37,7 @@ export const Home: React.FC = () => {
           ))}
           {superTeam.length < 6 && <AddHero setSearch={setTeamSearch} />}
         </Flex>
-        <TeamStats team={superTeam} />
+
         <TeamHW team={superTeam} />
       </Container>
     </Flex>
