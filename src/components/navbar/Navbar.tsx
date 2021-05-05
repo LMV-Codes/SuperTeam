@@ -20,16 +20,15 @@ interface decodedUser {
 export const Navbar: React.FC<NavbarProps> = ({ userData, setUserData }) => {
   const history = useHistory();
 
-
+  const checkLogin = () => {
+    if (localStorage.getItem("token") === null) {
+      history.push("/login");
+    }
+  };
 
   useEffect(() => {
-    const CheckLogin = () => {
-      const history = useHistory();
-      if (localStorage.getItem("token") === null) {
-        history.push("/login");
-      }
-    };
-    CheckLogin();
+    checkLogin();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logout = () => {
