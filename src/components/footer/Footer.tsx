@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
       justifyContent="center"
       alignContent="center"
       flexDirection="column"
-      position="absolute"
+      position="relative"
       width="100%"
       bottom="0"
     >

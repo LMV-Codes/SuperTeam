@@ -10,7 +10,7 @@ export const Home: React.FC = () => {
   const [heroSearch, setTeamSearch] = useState(false);
   const [superTeam, setSuperTeam] = useState<HeroData[]>([]);
   return (
-    <Flex justifyContent="center">
+    <Flex>
       <Container maxW="container.xl" bg="brand.100" minHeight="100vh">
         {heroSearch && (
           <TeamSearch

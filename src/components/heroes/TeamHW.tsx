@@ -49,16 +49,40 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
       padding="1em"
       borderRadius="5px"
     >
-      <Heading size="md" textAlign="center" textTransform="capitalize">
+      <Heading
+        size="md"
+        textAlign="center"
+        fontWeight="regular"
+        textTransform="uppercase"
+        marginBottom="1em"
+      >
         Average Team Height/Weight
       </Heading>
       <Flex justifyContent="space-around">
-        <Text marginRight="1em">
-          Height: {avgHeight}cm / {avgFeet}
-        </Text>
-        <Text textAlign="end">
-          Weight: {avgWeight}kg / {avgPounds}lbs
-        </Text>
+        <Flex>
+          <Text>Height:</Text>
+          <Text
+            marginRight="0.5em"
+            marginLeft="0.5em"
+            color="brand.400"
+            fontWeight="bold"
+            fontFamily="Roboto Condensed"
+          >
+            {avgHeight}cm / {avgFeet}
+          </Text>
+        </Flex>
+        <Flex>
+          <Text>Height:</Text>
+          <Text
+            marginRight="0.5em"
+            marginLeft="0.5em"
+            color="brand.400"
+            fontWeight="bold"
+            fontFamily="Roboto Condensed"
+          >
+            {avgWeight}kg / {avgPounds}lbs
+          </Text>
+        </Flex>
       </Flex>
     </Flex>
   );
