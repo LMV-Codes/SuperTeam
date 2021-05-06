@@ -11,6 +11,9 @@ export const Footer: React.FC = () => {
       justifyContent="center"
       alignContent="center"
       flexDirection="column"
+      position="absolute"
+      width="100%"
+      bottom="0"
     >
       <Text fontFamily="Roboto Condensed" textAlign="center">
         Made by: LMV-Codes
