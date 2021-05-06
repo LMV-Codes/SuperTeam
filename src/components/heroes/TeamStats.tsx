@@ -1,6 +1,7 @@
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import React from "react";
 import { HeroData } from "../../utils/interfaces";
+import { TeamHW } from "./TeamHW";
 
 interface TeamStatsProps {
   team: HeroData[];
@@ -106,6 +107,7 @@ export const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
           </Flex>
         ))}
       </Flex>
+      <TeamHW team={team} />
     </Flex>
   );
 };

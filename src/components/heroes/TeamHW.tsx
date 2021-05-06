@@ -46,7 +46,6 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
       justifyContent="center"
       alignContent="center"
       flexDirection="column"
-      marginBottom="2em"
       padding="1em"
       borderRadius="5px"
     >
@@ -54,7 +53,7 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
         Average Team Height/Weight
       </Heading>
       <Flex justifyContent="space-around">
-        <Text>
+        <Text marginRight="1em">
           Height: {avgHeight}cm / {avgFeet}
         </Text>
         <Text textAlign="end">
