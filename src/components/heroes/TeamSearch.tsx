@@ -75,6 +75,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
                 checkResponse();
                 setLoading(false);
               } catch (error) {
+                console.log(error)
                 toast({
                   title: "Error",
                   description: "Sorry, something went wrong",
