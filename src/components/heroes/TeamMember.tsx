@@ -2,6 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Image } from "@chakra-ui/image";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
+import { Collapse } from "@chakra-ui/transition";
 import React, { useState } from "react";
 import { HeroData } from "../../utils/interfaces";
 
@@ -17,12 +18,14 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   setSuperTeam,
 }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const { isOpen, onToggle } = useDisclosure()
 
   const handleRemove = (superTeam: HeroData[], heroId: string) => {
     const newTeam = superTeam.filter((teamHero) => teamHero.id !== heroId);
     setSuperTeam(newTeam);
   };
   const stats = Object.entries(hero.powerstats);
+  const worksAt = hero.work.base.split(',')
   const details = {
     weight: hero.appearance.weight.map((weight, index) => (
       <Text textAlign="end" key={index}>
@@ -37,7 +40,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
     fullname: hero.biography["full-name"],
     haircolor: hero.appearance["hair-color"],
     eyecolor: hero.appearance["eye-color"],
-    work: hero.work.base,
+    work: worksAt.map((place, index) => (<Text key={index} textAlign="end">{place}</Text>)),
     aliases: hero.biography.aliases.map((alias, index) => (
       <Text key={index} textAlign="end">
         {alias}
@@ -93,9 +96,10 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
             </Flex>
           ))}
         </Flex>
-        {showDetails && (
-          <Flex
-            marginLeft="1em"
+      </Flex>
+      <Collapse in={isOpen} animateOpacity>
+      <Flex
+            marginTop="1em"
             flexDirection="column"
             justifyContent="space-between"
           >
@@ -124,9 +128,8 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
               </Flex>
             ))}
           </Flex>
-        )}
-      </Flex>
-      <Heading
+      </Collapse>
+              <Heading
         textAlign="center"
         textTransform="uppercase"
         marginTop="0.5em"
@@ -144,30 +147,16 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
         Alignment: {hero.biography.alignment}
       </Text>
       <Flex justifyContent="space-evenly">
-        {showDetails ? (
-          <Button
-            variant="superoutline"
-            fontWeight="regular"
-            margin="1em"
-            textTransform="uppercase"
-            bg="brand.200"
-            isFullWidth
-            onClick={() => setShowDetails(!showDetails)}
-          >
-            Details
-          </Button>
-        ) : (
-          <Button
+      <Button
             variant="superoutline"
             fontWeight="regular"
             margin="1em"
             textTransform="uppercase"
             isFullWidth
-            onClick={() => setShowDetails(!showDetails)}
+            onClick={() => onToggle()}
           >
             Details
           </Button>
-        )}
 
         <Button
           variant="superdanger"
