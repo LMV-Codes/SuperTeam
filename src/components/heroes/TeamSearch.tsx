@@ -63,7 +63,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
                     setHeroData([]);
                     toast({
                       title: "Error",
-                      description: "Can't find a hero with that name",
+                      description: "Can't find any hero with that name",
                       status: "error",
                       duration: 9000,
                       isClosable: true,
@@ -78,7 +78,7 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
                 console.log(error)
                 toast({
                   title: "Error",
-                  description: "Sorry, something went wrong",
+                  description: "Sorry, something went wrong, did you run the proxy command?",
                   status: "error",
                   duration: 9000,
                   isClosable: true,
