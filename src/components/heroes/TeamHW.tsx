@@ -57,7 +57,7 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
         <Text>
           Height: {avgHeight}cm / {avgFeet}
         </Text>
-        <Text>
+        <Text textAlign="end">
           Weight: {avgWeight}kg / {avgPounds}lbs
         </Text>
       </Flex>

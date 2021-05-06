@@ -1,5 +1,6 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Footer } from "./components/footer/Footer";
 import { Navbar } from "./components/navbar/Navbar";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
@@ -23,6 +24,7 @@ export const App: React.FC = () => {
         />
         <Route component={NotFound} />
       </Switch>
+      <Footer />
     </Router>
   );
 };
