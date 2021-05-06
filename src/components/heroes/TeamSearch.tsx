@@ -10,6 +10,7 @@ import { AxiosApi } from "../../utils/AxiosApi";
 import { SearchList } from "./SearchList";
 import { AiOutlineClose } from "react-icons/ai";
 import { HeroData } from "../../utils/interfaces";
+import {motion} from "framer-motion"
 
 interface TeamSearchProps {
   setTeamSearch: Function;
@@ -26,112 +27,114 @@ export const TeamSearch: React.FC<TeamSearchProps> = ({
   const toast = useToast();
   const [heroData, setHeroData] = useState([]);
   return (
-    <Flex
-      width="100%"
-      height="100%"
-      bg="rgba(16, 15, 16, 0.8)"
-      position="absolute"
-      zIndex="10"
-      justifyContent="center"
-      top="0"
-      left="0"
-    >
-      <Container maxW="container.xl">
-        <Flex
-          marginTop="5em"
-          flexDirection="column"
-          bg="brand.100"
-          padding="2em"
-          borderRadius="5px"
-        >
-          <Icon
-            as={AiOutlineClose}
-            fontSize="1.2em"
-            marginLeft="auto"
-            marginRight="0"
-            _hover={{ color: "brand.400", cursor: "pointer" }}
-            paddingTop="0"
-            onClick={() => setTeamSearch(false)}
-          />
-          <Formik
-            initialValues={{ search: "" }}
-            onSubmit={async (values, { setErrors }) => {
-              try {
-                const response = await AxiosApi.get(`search/${values.search}`);
-                const checkResponse = () => {
-                  if (response.data.results === undefined) {
-                    setHeroData([]);
-                    toast({
-                      title: "Error",
-                      description: "Can't find any hero with that name",
-                      status: "error",
-                      duration: 9000,
-                      isClosable: true,
-                    });
-                  } else {
-                    setHeroData(response.data.results);
-                  }
-                };
-                checkResponse();
-                setLoading(false);
-              } catch (error) {
-                console.log(error)
-                toast({
-                  title: "Error",
-                  description: "Sorry, something went wrong, did you run the proxy command?",
-                  status: "error",
-                  duration: 9000,
-                  isClosable: true,
-                });
-              }
-            }}
+    <motion.div initial={{opacity: 0.6}}animate={{opacity: 1}}>
+      <Flex
+        width="100%"
+        height="100%"
+        bg="rgba(16, 15, 16, 0.8)"
+        position="absolute"
+        zIndex="10"
+        justifyContent="center"
+        top="0"
+        left="0"
+      >
+        <Container maxW="container.xl">
+          <Flex
+            marginTop="5em"
+            flexDirection="column"
+            bg="brand.100"
+            padding="2em"
+            borderRadius="5px"
           >
-            {(props) => (
-              <Form>
-                <Flex alignItems="flex-end">
-                  <Field name="search">
-                    {({ field }: any) => (
-                      <Input
-                        {...field}
-                        id="search"
-                        placeholder="Search members for your super team"
-                        type="text"
-                        borderRightRadius="0"
-                        borderColor="brand.300"
-                        bg="brand.50"
-                        focusBorderColor="brand.300"
-                        autoFocus
-                      />
-                    )}
-                  </Field>
-                  <Button
-                    textAlign="center"
-                    marginTop="1em"
-                    variant="superoutline"
-                    isLoading={props.isSubmitting}
-                    type="submit"
-                    bg="brand.300"
-                    marginLeft="auto"
-                    marginRight="auto"
-                    fontWeight="regular"
-                    borderLeftRadius="0"
-                    onClick={() => setLoading(true)}
-                  >
-                    <Icon as={FaSearch} />
-                  </Button>
-                </Flex>
-              </Form>
-            )}
-          </Formik>
-          <SearchList
-            heroData={heroData}
-            setSuperTeam={setSuperTeam}
-            setTeamSearch={setTeamSearch}
-            superTeam={superTeam}
-            loading={loading}
-          />
-        </Flex>
-      </Container>
-    </Flex>
+            <Icon
+              as={AiOutlineClose}
+              fontSize="1.2em"
+              marginLeft="auto"
+              marginRight="0"
+              _hover={{ color: "brand.400", cursor: "pointer" }}
+              paddingTop="0"
+              onClick={() => setTeamSearch(false)}
+            />
+            <Formik
+              initialValues={{ search: "" }}
+              onSubmit={async (values, { setErrors }) => {
+                try {
+                  const response = await AxiosApi.get(`search/${values.search}`);
+                  const checkResponse = () => {
+                    if (response.data.results === undefined) {
+                      setHeroData([]);
+                      toast({
+                        title: "Error",
+                        description: "Can't find any hero with that name",
+                        status: "error",
+                        duration: 9000,
+                        isClosable: true,
+                      });
+                    } else {
+                      setHeroData(response.data.results);
+                    }
+                  };
+                  checkResponse();
+                  setLoading(false);
+                } catch (error) {
+                  console.log(error)
+                  toast({
+                    title: "Error",
+                    description: "Sorry, something went wrong, did you run the proxy command?",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                }
+              }}
+            >
+              {(props) => (
+                <Form>
+                  <Flex alignItems="flex-end">
+                    <Field name="search">
+                      {({ field }: any) => (
+                        <Input
+                          {...field}
+                          id="search"
+                          placeholder="Search members for your super team"
+                          type="text"
+                          borderRightRadius="0"
+                          borderColor="brand.300"
+                          bg="brand.50"
+                          focusBorderColor="brand.300"
+                          autoFocus
+                        />
+                      )}
+                    </Field>
+                    <Button
+                      textAlign="center"
+                      marginTop="1em"
+                      variant="superoutline"
+                      isLoading={props.isSubmitting}
+                      type="submit"
+                      bg="brand.300"
+                      marginLeft="auto"
+                      marginRight="auto"
+                      fontWeight="regular"
+                      borderLeftRadius="0"
+                      onClick={() => setLoading(true)}
+                    >
+                      <Icon as={FaSearch} />
+                    </Button>
+                  </Flex>
+                </Form>
+              )}
+            </Formik>
+            <SearchList
+              heroData={heroData}
+              setSuperTeam={setSuperTeam}
+              setTeamSearch={setTeamSearch}
+              superTeam={superTeam}
+              loading={loading}
+            />
+          </Flex>
+        </Container>
+      </Flex>
+    </motion.div>
   );
 };
