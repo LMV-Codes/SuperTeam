@@ -1,14 +1,27 @@
 import { Container, Flex } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AddHero } from "../components/heroes/AddHero";
 import { TeamSearch } from "../components/heroes/TeamSearch";
 import { TeamMember } from "../components/heroes/TeamMember";
 import { HeroData } from "../utils/interfaces";
 import { TeamStats } from "../components/heroes/TeamStats";
+import { useHistory } from "react-router";
 
 export const Home: React.FC = () => {
   const [heroSearch, setTeamSearch] = useState(false);
   const [superTeam, setSuperTeam] = useState<HeroData[]>([]);
+  const history = useHistory();
+  const checkLogin = () => {
+    if (localStorage.getItem("token") === null) {
+      history.push("/login");
+    }
+  };
+
+  useEffect(() => {
+    checkLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Flex>
       <Container maxW="container.xl" bg="brand.100" minHeight="100vh">
