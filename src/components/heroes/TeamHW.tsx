@@ -72,7 +72,7 @@ export const TeamHW: React.FC<TeamHWProps> = ({ team }) => {
           </Text>
         </Flex>
         <Flex>
-          <Text>Height:</Text>
+          <Text>Weight:</Text>
           <Text
             marginRight="0.5em"
             marginLeft="0.5em"
